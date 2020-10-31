@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  app:
+    build: app/
+    env_file: .env
+    stdin_open: true
+    tty: true
+    links:
+      - db
+    ports:
+      - "7001:7001"
+    volumes:
+      - ./app:/app
+    command: bash -c "python /app/manage.py runserver 0:7001"
+  db:
+    restart: always
+    image: postgres:9.6.17
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_volume:/var/lib/postgresql
+
+volumes:
+  db_volume:
