@@ -3,7 +3,6 @@ version: "3"
 services:
   app:
     build: app/
-    env_file: .env
     stdin_open: true
     tty: true
     links:
@@ -12,6 +11,7 @@ services:
       - "7001:7001"
     volumes:
       - ./app:/app
+      - /app/.venv
     command: bash -c "python /app/manage.py runserver 0:7001"
   db:
     restart: always
