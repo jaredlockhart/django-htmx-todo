@@ -12,6 +12,7 @@ services:
     volumes:
       - ./app:/app
       - /app/.venv
+      - /app/.mypy_cache
     command: bash -c "python /app/manage.py runserver 0:7001"
   db:
     restart: always
