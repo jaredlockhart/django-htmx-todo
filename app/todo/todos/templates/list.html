@@ -33,28 +33,30 @@
   </div>
 </div>
 
-<table class="table table-striped border rounded">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Incomplete Tasks</th>
-      <th scope="col">Complete Tasks</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for todolist in todolists %}
-    <tr>
-      <th scope="row">
-        <a href="{{ todolist.get_absolute_url }}">
-          {{ todolist.name }}
-        </a>
-      </th>
-      <td>{{ todolist.done_items.count }}</td>
-      <td>{{ todolist.not_done_items.count }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="card">
+  <table class="table table-striped m-0">
+    <thead>
+      <tr>
+        <th class="border-0" scope="col">Name</th>
+        <th class="border-0" scope="col">Incomplete Tasks</th>
+        <th class="border-0" scope="col">Complete Tasks</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todolist in todolists %}
+      <tr>
+        <th class="border-0" scope="row">
+          <a href="{{ todolist.get_absolute_url }}">
+            {{ todolist.name }}
+          </a>
+        </th>
+        <td class="border-0">{{ todolist.done_items.count }}</td>
+        <td class="border-0">{{ todolist.not_done_items.count }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
 
 {% block extrascripts %}
