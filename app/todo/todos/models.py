@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class TodoList(models.Model):
@@ -9,8 +10,11 @@ class TodoList(models.Model):
         verbose_name = "Todo List"
         verbose_name_plural = "Todo Lists"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
+
+    def get_absolute_url(self) -> str:
+        return reverse("todolist-detail", kwargs={"slug": self.slug})
 
 
 class TodoItem(models.Model):
@@ -22,5 +26,5 @@ class TodoItem(models.Model):
         verbose_name = "Todo Item"
         verbose_name_plural = "Todo Items"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name

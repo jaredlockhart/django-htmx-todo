@@ -1,0 +1,10 @@
+{% load crispy_forms_tags %}
+
+<div id="todo-list-form" class="w-100 p-3">
+  <form>
+    {% csrf_token %}
+    {{ form | crispy }}
+    <button class="btn btn-primary" hx-post="{% url 'todolist-create' %}" hx-swap="outerHTML"
+      hx-target="#todo-list-form">Create</button>
+  </form>
+</div>
