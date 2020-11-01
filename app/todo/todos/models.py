@@ -16,9 +16,21 @@ class TodoList(models.Model):
     def get_absolute_url(self) -> str:
         return reverse("todolist-detail", kwargs={"slug": self.slug})
 
+    @property
+    def done_items(self) -> models.QuerySet["TodoItem"]:
+        return self.items.filter(is_done=True)
+
+    @property
+    def not_done_items(self) -> models.QuerySet["TodoItem"]:
+        return self.items.filter(is_done=False)
+
 
 class TodoItem(models.Model):
-    todo_list = models.ForeignKey(TodoList, on_delete=models.CASCADE)
+    todo_list = models.ForeignKey(
+        TodoList,
+        related_name="items",
+        on_delete=models.CASCADE,
+    )
     name = models.CharField(max_length=255)
     is_done = models.BooleanField(default=False)
 

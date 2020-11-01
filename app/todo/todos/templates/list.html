@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row">
+<div class="row mb-3">
   <div class="col">
-    <h4>
+    <h4 class="pt-1 mb-0">
       {{ todolists.count }} To Do Lists
     </h4>
   </div>
@@ -32,15 +32,29 @@
     </div>
   </div>
 </div>
-{% for todolist in todolists %}
-<div class="row">
-  <div class="col">
-    <a href="{{ todolist.get_absolute_url }}">
-      {{ todolist.name }}
-    </a>
-  </div>
-</div>
-{% endfor %}
+
+<table class="table table-striped border rounded">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Incomplete Tasks</th>
+      <th scope="col">Complete Tasks</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for todolist in todolists %}
+    <tr>
+      <th scope="row">
+        <a href="{{ todolist.get_absolute_url }}">
+          {{ todolist.name }}
+        </a>
+      </th>
+      <td>{{ todolist.done_items.count }}</td>
+      <td>{{ todolist.not_done_items.count }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
 
 {% block extrascripts %}
