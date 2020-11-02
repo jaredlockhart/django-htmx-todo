@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "django-htmx-todo"
+name = "django-htmx-tasker"
 version = "0.1.0"
 description = ""
 authors = ["Jared Lockhart"]

@@ -2,8 +2,8 @@ WAIT_FOR_DB = /app/bin/wait-for-it.sh db:5432 &&
 
 COMPOSE = docker-compose -f docker-compose.yml
 MIGRATE = python manage.py migrate
-FLAKE8 = flake8 todo/
-MYPY = mypy todo/
+FLAKE8 = flake8 tasker/
+MYPY = mypy tasker/
 
 secretkey:
 	openssl rand -hex 24

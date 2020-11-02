@@ -7,7 +7,7 @@
       <div class="input-group-prepend">
         <div class="input-group-text"><i class="fas fa-search"></i></div>
       </div>
-      <input type="search" class="form-control" id="inlineFormInputGroup" placeholder="Search To Do Lists">
+      <input type="search" class="form-control" id="inlineFormInputGroup" placeholder="Search Task Lists">
     </div>
   </div>
   <div class="col pt-2">
@@ -30,7 +30,7 @@
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
       <i class="fas fa-plus"></i>
-      Create To Do List
+      Create Task List
     </button>
 
     <!-- Modal -->
@@ -38,7 +38,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="createModalLabel">Create To Do List</h5>
+            <h5 class="modal-title" id="createModalLabel">Create Task List</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -62,15 +62,15 @@
       </tr>
     </thead>
     <tbody>
-      {% for todolist in todolists %}
+      {% for tasklist in tasklists %}
       <tr>
         <th class="border-0" scope="row">
-          <a href="{{ todolist.get_absolute_url }}">
-            {{ todolist.name }}
+          <a href="{{ tasklist.get_absolute_url }}">
+            {{ tasklist.name }}
           </a>
         </th>
-        <td class="border-0">{{ todolist.done_items.count }}</td>
-        <td class="border-0">{{ todolist.not_done_items.count }}</td>
+        <td class="border-0">{{ tasklist.done_items.count }}</td>
+        <td class="border-0">{{ tasklist.not_done_items.count }}</td>
       </tr>
       {% endfor %}
     </tbody>
