@@ -1,16 +1,35 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row mb-3">
+<div class="row mb-2">
   <div class="col">
-    <h4 class="pt-1 mb-0">
-      {{ todolists.count }} To Do Lists
-    </h4>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text"><i class="fas fa-search"></i></div>
+      </div>
+      <input type="search" class="form-control" id="inlineFormInputGroup" placeholder="Search To Do Lists">
+    </div>
   </div>
+  <div class="col pt-2">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
+      <label class="form-check-label" for="inlineRadio1">All</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+      <label class="form-check-label" for="inlineRadio2">Complete</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+      <label class="form-check-label" for="inlineRadio3">Incomplete</label>
+    </div>
+  </div>
+
   <div class="col text-right">
     <!-- Example single danger button -->
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+      <i class="fas fa-plus"></i>
       Create To Do List
     </button>
 
