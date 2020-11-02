@@ -7,7 +7,8 @@
       <div class="input-group-prepend">
         <div class="input-group-text"><i class="fas fa-search"></i></div>
       </div>
-      <input type="search" class="form-control" id="inlineFormInputGroup" placeholder="Search Task Lists">
+      <input name="name" class="form-control" id="inlineFormInputGroup" placeholder="Search Task Lists"
+        hx-get="{% url 'tasklist-filter' %}" hx-trigger="keyup changed delay:500ms" hx-target="#tasklist-table">
     </div>
   </div>
   <div class="col pt-2">
@@ -44,7 +45,7 @@
             </button>
           </div>
           <div class="modal-body">
-            {% include "create.html" %}
+            {% include "tasks/tasklist_form.html" %}
           </div>
         </div>
       </div>
@@ -52,30 +53,10 @@
   </div>
 </div>
 
-<div class="card">
-  <table class="table table-striped m-0">
-    <thead>
-      <tr>
-        <th class="border-0" scope="col">Name</th>
-        <th class="border-0" scope="col">Incomplete Tasks</th>
-        <th class="border-0" scope="col">Complete Tasks</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for tasklist in tasklists %}
-      <tr>
-        <th class="border-0" scope="row">
-          <a href="{{ tasklist.get_absolute_url }}">
-            {{ tasklist.name }}
-          </a>
-        </th>
-        <td class="border-0">{{ tasklist.done_items.count }}</td>
-        <td class="border-0">{{ tasklist.not_done_items.count }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div id="tasklist-table">
+  {% include "tasks/tasklist_filter.html" with object_list=object_list %}
 </div>
+
 {% endblock %}
 
 {% block extrascripts %}

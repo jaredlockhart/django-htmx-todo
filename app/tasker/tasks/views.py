@@ -4,21 +4,24 @@ from typing import Any, Dict
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.views.generic import CreateView, DetailView, ListView
+from django_filters.views import FilterView
+from tasker.tasks.filters import TaskListFilter
 from tasker.tasks.forms import TaskListForm
 from tasker.tasks.models import TaskList
 
 
 class TaskListListView(ListView):
-    template_name = "list.html"
     model = TaskList
-    context_object_name = "tasklists"
 
     def get_context_data(self, **kwargs: Dict[str, Any]) -> Dict[str, Any]:
         return super().get_context_data(form=TaskListForm(), **kwargs)
 
 
+class TaskListFilterView(FilterView):
+    filterset_class = TaskListFilter
+
+
 class TaskListCreateView(CreateView):
-    template_name = "create.html"
     model = TaskList
     form_class = TaskListForm
 
@@ -32,6 +35,4 @@ class TaskListCreateView(CreateView):
 
 
 class TaskListDetailView(DetailView):
-    template_name = "detail.html"
     model = TaskList
-    context_object_name = "tasklist"

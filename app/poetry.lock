@@ -105,6 +105,17 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "django-filter"
+version = "2.4.0"
+description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+Django = ">=2.2"
+
+[[package]]
 name = "django-stubs"
 version = "1.7.0"
 description = "Mypy stubs for Django"
@@ -391,7 +402,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "5da9333c88c71fbc1bdbd97dbc4b2b6bc772ab8ae222d77bd44de1d8218f61eb"
+content-hash = "76000a04f4cd55656f6acfc7d43b0a19f746631bcce7b2ccb789cd9aaaf2a692"
 
 [metadata.files]
 appdirs = [
@@ -432,6 +443,10 @@ django = [
 django-crispy-forms = [
     {file = "django-crispy-forms-1.9.2.tar.gz", hash = "sha256:f2f1e0fbb458851636447cfb6be1a611b40c8ac9e41a74ba923011378670b43b"},
     {file = "django_crispy_forms-1.9.2-py3-none-any.whl", hash = "sha256:888bb316db89b60050a42ec35080facb361d823eec38010ccb0702f45642d3b8"},
+]
+django-filter = [
+    {file = "django-filter-2.4.0.tar.gz", hash = "sha256:84e9d5bb93f237e451db814ed422a3a625751cbc9968b484ecc74964a8696b06"},
+    {file = "django_filter-2.4.0-py3-none-any.whl", hash = "sha256:e00d32cebdb3d54273c48f4f878f898dced8d5dfaad009438fe61ebdf535ace1"},
 ]
 django-stubs = [
     {file = "django-stubs-1.7.0.tar.gz", hash = "sha256:ddd190aca5b9adb4d30760d5c64f67cb3658703f5f42c3bb0c2c71ff4d752c39"},
