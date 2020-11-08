@@ -3,7 +3,7 @@ from django.utils.text import slugify
 from tasker.tasks.models import TaskList
 
 
-class TaskListForm(forms.ModelForm):
+class TaskListCreateForm(forms.ModelForm):
     slug = forms.CharField(required=False, widget=forms.widgets.HiddenInput())
 
     class Meta:

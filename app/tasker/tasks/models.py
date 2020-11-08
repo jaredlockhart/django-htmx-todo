@@ -20,11 +20,15 @@ class TaskList(models.Model):
         return reverse("tasklist-detail", kwargs={"slug": self.slug})
 
     @property
-    def done_items(self) -> models.QuerySet["Task"]:
+    def is_complete(self) -> bool:
+        return not self.tasks.filter(is_done=False).exists()
+
+    @property
+    def complete_tasks(self) -> models.QuerySet["Task"]:
         return self.tasks.filter(is_done=True)
 
     @property
-    def not_done_items(self) -> models.QuerySet["Task"]:
+    def incomplete_tasks(self) -> models.QuerySet["Task"]:
         return self.tasks.filter(is_done=False)
 
 

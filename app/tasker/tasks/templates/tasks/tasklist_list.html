@@ -1,32 +1,37 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
+
 {% block content %}
 <div class="row mb-2">
-  <div class="col">
-    <div class="input-group mb-2">
-      <div class="input-group-prepend">
-        <div class="input-group-text"><i class="fas fa-search"></i></div>
+  <div class="col-9">
+    <form hx-trigger="keyup,mouseup delay:100ms" hx-get="{% url 'tasklist-filter' %}" hx-target="#tasklist-table">
+      <div class="form-row">
+        <div class="col">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fas fa-search"></i></div>
+            </div>
+            <input name="name" class="form-control" id="id_name" placeholder="Search Task Lists">
+          </div>
+        </div>
+        <div class="col pt-2">
+          {% for choice in filterset.form.completeness.field.choices %}
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="completeness" id="id_completeness_{{ forloop.counter }}"
+              value="{{ choice.0 }}">
+            <label class="form-check-label" for="id_completeness_{{ forloop.counter }}">{{ choice.1 }}</label>
+          </div>
+          {% endfor %}
+        </div>
       </div>
-      <input name="name" class="form-control" id="inlineFormInputGroup" placeholder="Search Task Lists"
-        hx-get="{% url 'tasklist-filter' %}" hx-trigger="keyup changed delay:500ms" hx-target="#tasklist-table">
-    </div>
-  </div>
-  <div class="col pt-2">
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-      <label class="form-check-label" for="inlineRadio1">All</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-      <label class="form-check-label" for="inlineRadio2">Complete</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-      <label class="form-check-label" for="inlineRadio3">Incomplete</label>
-    </div>
+    </form>
   </div>
 
-  <div class="col text-right">
+
+
+  <div class="col-3 text-right">
     <!-- Example single danger button -->
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
@@ -64,6 +69,7 @@
   document.addEventListener("redirect", evt => {
     console.log(evt);
     window.location.href = evt.detail.url;
-  })
+  });
+  htmx.logAll();
 </script>
 {% endblock %}

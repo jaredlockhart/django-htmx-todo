@@ -7,7 +7,7 @@ from django.http.request import HttpRequest
 from django.views.generic import CreateView, DetailView, ListView
 from django_filters.views import FilterView
 from tasker.tasks.filters import TaskListFilter
-from tasker.tasks.forms import TaskListForm
+from tasker.tasks.forms import TaskListCreateForm
 from tasker.tasks.models import TaskList
 
 
@@ -15,7 +15,9 @@ class TaskListListView(ListView):
     model = TaskList
 
     def get_context_data(self, **kwargs: Dict[str, Any]) -> Dict[str, Any]:
-        return super().get_context_data(form=TaskListForm(), **kwargs)
+        return super().get_context_data(
+            form=TaskListCreateForm(), filterset=TaskListFilter, **kwargs
+        )
 
 
 class TaskListFilterView(FilterView):
@@ -24,7 +26,7 @@ class TaskListFilterView(FilterView):
 
 class TaskListCreateView(CreateView):
     model = TaskList
-    form_class = TaskListForm
+    form_class = TaskListCreateForm
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         task_list = form.save()
@@ -39,13 +41,13 @@ class TaskListDetailView(DetailView):
     model = TaskList
 
 
-class TaskListItemsView(DetailView):
+class TaskListTasksView(DetailView):
     model = TaskList
 
 
 class TaskListAddTaskView(DetailView):
     model = TaskList
-    template_name = "tasks/tasklist_items.html"
+    template_name = "tasks/tasklist_tasks.html"
 
     def post(
         self, request: HttpRequest, *args: List[Any], **kwargs: Dict[str, Any]

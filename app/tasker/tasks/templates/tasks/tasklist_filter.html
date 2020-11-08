@@ -15,8 +15,8 @@
             {{ tasklist.name }}
           </a>
         </th>
-        <td class="border-0">{{ tasklist.done_items.count }}</td>
-        <td class="border-0">{{ tasklist.not_done_items.count }}</td>
+        <td class="border-0">{{ tasklist.complete_tasks.count }}</td>
+        <td class="border-0">{{ tasklist.incomplete_tasks.count }}</td>
       </tr>
       {% endfor %}
     </tbody>
