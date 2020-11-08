@@ -1,10 +1,13 @@
 from django.db import models
+from django.db.models.query import QuerySet
 from django.urls import reverse
 
 
 class TaskList(models.Model):
     name = models.CharField(max_length=255)
     slug = models.CharField(max_length=255)
+
+    tasks: QuerySet["Task"]
 
     class Meta:
         verbose_name = "Task List"
@@ -17,18 +20,18 @@ class TaskList(models.Model):
         return reverse("tasklist-detail", kwargs={"slug": self.slug})
 
     @property
-    def done_items(self) -> models.QuerySet["TaskItem"]:
-        return self.items.filter(is_done=True)
+    def done_items(self) -> models.QuerySet["Task"]:
+        return self.tasks.filter(is_done=True)
 
     @property
-    def not_done_items(self) -> models.QuerySet["TaskItem"]:
-        return self.items.filter(is_done=False)
+    def not_done_items(self) -> models.QuerySet["Task"]:
+        return self.tasks.filter(is_done=False)
 
 
-class TaskItem(models.Model):
+class Task(models.Model):
     task_list = models.ForeignKey(
         TaskList,
-        related_name="items",
+        related_name="tasks",
         on_delete=models.CASCADE,
     )
     name = models.CharField(max_length=255)

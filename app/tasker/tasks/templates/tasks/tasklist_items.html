@@ -1,0 +1,7 @@
+{% for item in tasklist.tasks.all %}
+<tr>
+  <td class="border-0" scope="row">
+    Item: {{ item.name }}
+  </td>
+</tr>
+{% endfor %}

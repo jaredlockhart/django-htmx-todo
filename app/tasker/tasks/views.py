@@ -1,8 +1,9 @@
 import json
-from typing import Any, Dict
+from typing import Any, Dict, List, cast
 
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
+from django.http.request import HttpRequest
 from django.views.generic import CreateView, DetailView, ListView
 from django_filters.views import FilterView
 from tasker.tasks.filters import TaskListFilter
@@ -36,3 +37,18 @@ class TaskListCreateView(CreateView):
 
 class TaskListDetailView(DetailView):
     model = TaskList
+
+
+class TaskListItemsView(DetailView):
+    model = TaskList
+
+
+class TaskListAddTaskView(DetailView):
+    model = TaskList
+    template_name = "tasks/tasklist_items.html"
+
+    def post(
+        self, request: HttpRequest, *args: List[Any], **kwargs: Dict[str, Any]
+    ) -> HttpResponse:
+        cast(TaskList, self.get_object()).tasks.create()
+        return self.get(request, *args, **kwargs)

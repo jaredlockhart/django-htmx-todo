@@ -1,9 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row">
-  <div class="col">
-    <h4>{{ tasklist.name }}</h4>
+<div class="card">
+  <table class="table table-striped m-0">
+    <thead>
+      <tr>
+        <th class="border-0" scope="col">{{ tasklist.name }}</th>
+      </tr>
+    </thead>
+    <tbody id="tasklist-tasks">
+      {% include "tasks/tasklist_items.html" with tasklist=tasklist %}
+    </tbody>
+  </table>
+  <div class="card-body px-3">
+    <form hx-post="{% url 'tasklist-add-task' slug=tasklist.slug %}" hx-target="#tasklist-tasks">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-primary btn-sm">
+        <i class="fas fa-plus"></i>
+        Add Task
+      </button>
+    </form>
   </div>
 </div>
 {% endblock %}
