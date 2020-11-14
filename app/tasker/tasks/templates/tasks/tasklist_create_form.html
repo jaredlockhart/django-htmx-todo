@@ -1,24 +1,24 @@
 <div id="tasker-list-form">
   <form>
-    <form>
-      {% csrf_token %}
-      <div class="form-row">
-        <div class="col-10">
-
-          <input class="form-control
+    {% csrf_token %}
+    <div class="form-row mb-2">
+      <div class="col">
+        <input class="form-control
           {% if form.name.errors %}
             is-invalid
           {% endif %}
-          " id="id_name" name="name" placeholder="Name" value="{{ form.value }}">
-          <div class="invalid-feedback">
-            {{ form.name.errors }}
-          </div>
-        </div>
-        <div class=" col-2">
-          <button class="btn btn-primary" hx-post="{% url 'tasklist-create' %}" hx-swap="outerHTML"
-            hx-target="#tasker-list-form">Create</button>
+          " id="id_name" name="name" placeholder="Name" {% if form.name.value %} value="{{ form.name.value }}"
+          {% endif %}>
+        <div class="invalid-feedback">
+          {{ form.name.errors }}
         </div>
       </div>
-    </form>
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <button class="btn btn-primary" hx-post="{% url 'tasklist-create' %}" hx-swap="outerHTML"
+          hx-target="#tasker-list-form">Create</button>
+      </div>
+    </div>
   </form>
 </div>
