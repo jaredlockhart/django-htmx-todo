@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "crispy_forms",
     "django_filters",
     "tasker.tasks",
 ]
@@ -129,4 +128,3 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "tasker" / "static",
 ]
-CRISPY_TEMPLATE_PACK = "bootstrap4"

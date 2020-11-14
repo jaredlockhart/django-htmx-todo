@@ -27,6 +27,7 @@ class TaskListFilterView(FilterView):
 class TaskListCreateView(CreateView):
     model = TaskList
     form_class = TaskListCreateForm
+    template_name = "tasks/tasklist_create_form.html"
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         task_list = form.save()
